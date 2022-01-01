@@ -19,8 +19,8 @@ const UserSchema = new Schema(
         ],
     },
     {
-        toJSON: { virtuals: true } //shouldnt need getters?
-        // id: false 
+        toJSON: { virtuals: true }, //shouldnt need getters?
+        id: false 
     }
 ); 
 
