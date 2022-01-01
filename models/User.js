@@ -3,17 +3,31 @@ const { Schema, model } = require('mongoose');
 
 const UserSchema = new Schema(
     {
-        username: { type: String, required: true, unique: true },//needs trimmerd
+        username: { type: String, required: true, unique: true, trim: true },
         email: { type: String, required: true, unique: true }, // needs verification
-        // thoughts: array of _id vals referencing Thought model
-        // friends: array of _id vals referencing User model
+        thoughts: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Thought'
+            }
+        ],
+        friends: [
+            {
+                type: Schema.Types.ObjectId, 
+                ref: 'User'
+            }
+        ],
     },
     {
-        toJSON: { virtuals: true, getters: true }
+        toJSON: { virtuals: true } //shouldnt need getters?
+        // id: false 
     }
 ); 
 
-//virtual 'friendCount' retrienves length of friends arr 
+//virtual 'friendCount' retrieves length of friends arr 
+UserSchema.virtual('friendCount').get(function() {
+    return this.friends.length;
+});
 
 const User = model('User', UserSchema);
 
