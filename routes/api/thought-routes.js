@@ -1,7 +1,7 @@
 
 const router = require('express').Router();
 
-const { getAllThought, postThought } = require('../../controllers/thought-controller');
+const { getAllThought, postThought, deleteThought } = require('../../controllers/thought-controller');
 
 router
     .route('/')
@@ -15,6 +15,7 @@ router
     .route('/:id')
     //set routes for /api/thoughts/:id
     //get by id, put by id, del by id
+    .delete(deleteThought);
 
 
     
