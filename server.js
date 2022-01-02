@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 //tells express to require and use ./routes/index.js
 app.use(require('./routes'));
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/pizza-hunt', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/no-sql-social', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
