@@ -18,7 +18,7 @@ router
 
 router
     .route('/:userId/friends/:friendId')
-    //post and delete friends list?
+    //post and delete friends from friends list
     .post(addFriend)
     .delete(removeFriend);
 

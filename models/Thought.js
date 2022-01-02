@@ -1,5 +1,5 @@
 
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const formatDate = require('../utils/formatDate');
 
 //schema for subdoc Reaction
@@ -7,8 +7,12 @@ const ReactionSchema = new Schema(
     {
         reactionId: { type: Schema.Types.ObjectId, default: () => new Types.ObjectId() },
         reactionBody: { type: String, required: true, minlength: 1, maxlength: 280 },
-        username: { type: String, required: true },
+        username: { type: String, ref: 'User', required: true },
         createdAt: { type: Date, default: Date.now, get: (createdAtVal) => formatDate(createdAtVal) }
+    },
+    {
+        toJSON: {virtuals: false},
+        id: false
     }
 );
 
@@ -34,5 +38,6 @@ ThoughtSchema.virtual('ReactionCount').get(function() {
 
 
 const Thought = model('Thought', ThoughtSchema);
+const Reaction = model('Reaction', ReactionSchema);
 
-module.exports = Thought;
+module.exports = {Thought, Reaction};
